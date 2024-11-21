@@ -1,4 +1,4 @@
-# Workout-Timer-App Project
+# Workout-Timer App Project
 
 A project from Udemy "Ultimate React Course 2024: React, Next.js, Redux & More" by Jonas Schmedtmann.
 Section 1: Performance Optimization and Advance useEffect / Lecture: 256: CHALLENGE #1: Fix Performance Issues in "Workout Timer"
