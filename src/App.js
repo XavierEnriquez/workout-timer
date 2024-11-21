@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Calculator from "./Calculator";
 import ToggleSounds from "./ToggleSounds";
 
@@ -9,28 +9,31 @@ function App() {
   // Will be be AM or PM
   const partOfDay = time.slice(-2);
 
-  const workouts = [
-    {
-      name: "Full-body workout",
-      numExercises: partOfDay === "AM" ? 9 : 8,
-    },
-    {
-      name: "Arms + Legs",
-      numExercises: 6,
-    },
-    {
-      name: "Arms only",
-      numExercises: 3,
-    },
-    {
-      name: "Legs only",
-      numExercises: 4,
-    },
-    {
-      name: "Core only",
-      numExercises: partOfDay === "AM" ? 5 : 4,
-    },
-  ];
+  // workouts array keeps being re-render beacuse it's checking for a the reactive value of partOfDay on every second of the timer. To fix this, the array can be put inside a function with a dependency array that keeps track of partOfDay. The function then goes inside a useMemo (memo to render functions, useMemo for values) that gets called in the initial render.
+  const workouts = useMemo(() => {
+    return [
+      {
+        name: "Full-body workout",
+        numExercises: partOfDay === "AM" ? 9 : 8,
+      },
+      {
+        name: "Arms + Legs",
+        numExercises: 6,
+      },
+      {
+        name: "Arms only",
+        numExercises: 3,
+      },
+      {
+        name: "Legs only",
+        numExercises: 4,
+      },
+      {
+        name: "Core only",
+        numExercises: partOfDay === "AM" ? 5 : 4,
+      },
+    ];
+  }, [partOfDay]);
 
   function formatTime(date) {
     return new Intl.DateTimeFormat("en", {
